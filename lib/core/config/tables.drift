@@ -1,5 +1,0 @@
-CREATE TABLE chat(
-  id INT NOT NULL PRIMARY KEY AUTOINCREMENT,
-  value TEXT,
-  isIncoming BOOLEAN
-);
