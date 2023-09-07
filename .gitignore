@@ -32,7 +32,6 @@
 /build/
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
@@ -47,7 +46,6 @@ app.*.map.json
 
 # Generated files
 lib/generated/
-lib/generated_plugin_registrant.dart
 
 #generated files
 **/*.g.dart
