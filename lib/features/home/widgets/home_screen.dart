@@ -53,7 +53,7 @@ class _Separator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Constants.separatorWidth,
+      width: 1,
       color: Colors.grey,
     );
   }

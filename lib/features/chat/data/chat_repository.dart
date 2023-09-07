@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:chatapp_test/core/core.dart';
 import 'package:chatapp_test/features/chat/models/message.dart';
+
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
 
 @lazySingleton
@@ -13,7 +15,7 @@ class ChatRepository {
         late StreamController<Message> controller;
         Timer? timer;
 
-        const duration = Duration(seconds: 3);
+        const duration = Duration(seconds: Constants.intervalInSeconds);
 
         void getMessage(Timer timer) {
           final message = js.context.callMethod('getRandomMessage');

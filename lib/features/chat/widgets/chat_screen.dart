@@ -154,7 +154,7 @@ class _MessageBubble extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(Constants.innerPadding),
       decoration: BoxDecoration(
-        color: message.isIncoming ? Colors.grey : Colors.blue,
+        color: message.isIncoming ? Colors.grey[300] : Colors.lightBlue[200],
         borderRadius: BorderRadius.only(
           topLeft: message.isIncoming
               ? Radius.zero

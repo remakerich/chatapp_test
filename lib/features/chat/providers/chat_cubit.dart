@@ -17,8 +17,13 @@ class ChatCubit extends Cubit<AsyncState<List<Message>>> {
   final ChatRepository _chatRepository;
   final ChatStorage _chatStorage;
 
-  List<Message> _messages = [];
   StreamSubscription<Message>? _chatSubscription;
+
+  final _cache = <Message>[];
+
+  List<Message> get _messages => _cache.reversed.toList();
+  set _messages(List<Message> newMessages) => _cache.addAll(newMessages);
+  _addMessage(Message message) => _cache.add(message);
 
   _started() async {
     final result = await _chatStorage.getChat();
@@ -26,7 +31,7 @@ class ChatCubit extends Cubit<AsyncState<List<Message>>> {
     await result.when(
       left: (failure) async => emit(AsyncError(failure)),
       right: (data) async {
-        _messages = data.toList();
+        _messages = data;
         await _subscribeToChat();
       },
     );
@@ -46,10 +51,9 @@ class ChatCubit extends Cubit<AsyncState<List<Message>>> {
   }
 
   _messageReceived(Message message) async {
-    _messages.add(message);
-    final reversed = _messages.reversed.toList();
-    emit(AsyncData(reversed));
+    _addMessage(message);
     await _chatStorage.saveMessage(message);
+    emit(AsyncData(_messages));
   }
 
   sendMessage(String text) async {
@@ -57,10 +61,6 @@ class ChatCubit extends Cubit<AsyncState<List<Message>>> {
       text: text,
       isIncoming: false,
     );
-    _messages.add(newMessage);
-    final reversed = _messages.reversed.toList();
-    // TODO reversed and emit bug
-    await _chatStorage.saveMessage(newMessage);
-    emit(AsyncData(reversed));
+    _messageReceived(newMessage);
   }
 }

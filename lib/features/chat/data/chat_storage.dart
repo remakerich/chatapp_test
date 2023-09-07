@@ -39,4 +39,12 @@ class ChatStorage {
       },
     );
   }
+
+  Future<Either<Failure, void>> clearMessages() {
+    return handleExceptions(
+      () async {
+        await _myDatabase.clearMessages();
+      },
+    );
+  }
 }

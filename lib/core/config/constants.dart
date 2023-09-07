@@ -8,5 +8,5 @@ class Constants {
   static const double outerPadding = 20;
   static const double borderRadius = 20;
 
-  static const double separatorWidth = 1;
+  static const int intervalInSeconds = 3;
 }
