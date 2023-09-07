@@ -1,19 +1,19 @@
-import 'package:chatapp_test/core/constants.dart';
-import 'package:chatapp_test/core/extensions.dart';
-import 'package:chatapp_test/features/chats/widgets/chats_list_screen.dart';
-import 'package:chatapp_test/features/room/widgets/room_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:chatapp_test/features/chat/widgets/chat_screen.dart';
+import 'package:chatapp_test/core/core.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (context.isNarrowScreen) {
-      return const RoomScreen();
-    }
-
-    return const _WideScreenLayout();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth > Constants.narrowScreenThreshold) {
+          return const _WideScreenLayout();
+        }
+        return const ChatScreen();
+      },
+    );
   }
 }
 
@@ -26,15 +26,24 @@ class _WideScreenLayout extends StatelessWidget {
       children: [
         Expanded(
           flex: Constants.chatsListFlex,
-          child: ChatsListScreen(),
+          child: _ChatsList(),
         ),
         _Separator(),
         Expanded(
-          flex: Constants.chatRoomFlex,
-          child: RoomScreen(),
+          flex: Constants.chatFlex,
+          child: ChatScreen(),
         ),
       ],
     );
+  }
+}
+
+class _ChatsList extends StatelessWidget {
+  const _ChatsList();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold();
   }
 }
 

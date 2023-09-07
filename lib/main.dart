@@ -1,7 +1,9 @@
+import 'package:chatapp_test/core/core.dart';
+import 'package:chatapp_test/features/chat/providers/chat_cubit.dart';
 import 'package:chatapp_test/features/home/widgets/home_screen.dart';
-import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  await initializeDependencies();
   runApp(const MyApp());
 }
 
@@ -10,9 +12,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<ChatCubit>(),
+        ),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomeScreen(),
+      ),
     );
   }
 }
