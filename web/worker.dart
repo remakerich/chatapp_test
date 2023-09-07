@@ -7,8 +7,15 @@ import 'package:drift/web/worker.dart';
 void main() {
   WorkerGlobalScope.instance.importScripts('sql-wasm.js');
 
-  driftWorkerMain(() {
-    return WebDatabase.withStorage(DriftWebStorage.indexedDb('worker',
-        migrateFromLocalStorage: false, inWebWorker: true));
-  });
+  driftWorkerMain(
+    () {
+      return WebDatabase.withStorage(
+        DriftWebStorage.indexedDb(
+          'worker',
+          migrateFromLocalStorage: false,
+          inWebWorker: true,
+        ),
+      );
+    },
+  );
 }

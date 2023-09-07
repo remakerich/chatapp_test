@@ -33,7 +33,7 @@ QueryExecutor _connect() {
   return DatabaseConnection.delayed(
     connectToDriftWorker(
       'worker.dart.js',
-      mode: DriftWorkerMode.shared,
+      mode: DriftWorkerMode.dedicated,
     ),
   );
 }
