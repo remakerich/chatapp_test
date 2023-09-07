@@ -61,12 +61,26 @@ class _InputFieldState extends State<_InputField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: _controller,
-      onSubmitted: (value) {
-        context.read<ChatCubit>().sendMessage(value);
-        _controller.clear();
-      },
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        Constants.outerPadding,
+        0,
+        Constants.outerPadding,
+        Constants.outerPadding,
+      ),
+      child: TextField(
+        controller: _controller,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+          labelText: 'Сообщение',
+        ),
+        onSubmitted: (value) {
+          context.read<ChatCubit>().sendMessage(value);
+          _controller.clear();
+        },
+      ),
     );
   }
 }

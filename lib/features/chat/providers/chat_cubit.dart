@@ -49,6 +49,7 @@ class ChatCubit extends Cubit<AsyncState<List<Message>>> {
     _messages.add(message);
     final reversed = _messages.reversed.toList();
     emit(AsyncData(reversed));
+    _chatStorage.saveMessage(message);
   }
 
   sendMessage(String text) async {
@@ -58,6 +59,7 @@ class ChatCubit extends Cubit<AsyncState<List<Message>>> {
     );
     _messages.add(newMessage);
     final reversed = _messages.reversed.toList();
+    // TODO reversed and emit bug
     emit(AsyncData(reversed));
   }
 }
