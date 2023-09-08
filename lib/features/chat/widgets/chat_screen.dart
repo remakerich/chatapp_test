@@ -138,7 +138,14 @@ class _MessageTile extends StatelessWidget {
       mainAxisAlignment:
           message.isIncoming ? MainAxisAlignment.start : MainAxisAlignment.end,
       children: [
-        _MessageBubble(message),
+        const Flexible(
+          flex: Constants.messageTileEmptySpaceFlex,
+          child: SizedBox(),
+        ),
+        Flexible(
+          flex: Constants.messageBubbleFlex,
+          child: _MessageBubble(message),
+        ),
       ],
     );
   }

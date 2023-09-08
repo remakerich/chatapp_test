@@ -25,6 +25,12 @@ class ChatCubit extends Cubit<AsyncState<List<Message>>> {
   set _messages(List<Message> newMessages) => _cache.addAll(newMessages);
   _addMessage(Message message) => _cache.add(message);
 
+  @override
+  Future<void> close() async {
+    await _chatSubscription?.cancel();
+    return super.close();
+  }
+
   _started() async {
     final result = await _chatStorage.getChat();
 
